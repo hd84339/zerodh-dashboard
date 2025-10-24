@@ -1,5 +1,5 @@
-// React import removed (automatic JSX runtime)
 import { Route, Routes } from "react-router-dom";
+import "./Dashboard.css";
 
 import Apps from "./Apps";
 import Funds from "./Funds";

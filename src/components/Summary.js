@@ -1,5 +1,5 @@
-// React import removed (automatic JSX runtime)
 import React, { useEffect, useState } from "react";
+import "./Summary.css";
 
 
 const Summary = () => {
