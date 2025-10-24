@@ -1,4 +1,4 @@
-import React from "react";
+// React import removed (automatic JSX runtime)
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 

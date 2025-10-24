@@ -33,7 +33,7 @@ const Menu = () => {
 
   return (
     <div className="menu-container">
-      <img src="logo.png" style={{ width: "50px" }} />
+  <img src="logo.png" alt="Dashboard logo" style={{ width: "50px" }} />
       <div className="menus">
         <ul>
           <li>
@@ -126,10 +126,8 @@ const Menu = () => {
                 <i className="fas fa-sign-out-alt" style={{ marginRight: "8px" }} />
                 Logout
               </button>
-              <a 
-                href="http://localhost:3000" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              <button
+                type="button"
                 className="btn btn-sm btn-outline-primary"
                 style={{
                   marginTop: "8px",
@@ -142,10 +140,18 @@ const Menu = () => {
                   alignItems: "center",
                   justifyContent: "center"
                 }}
+                onClick={() => {
+                  const landingUrl = "http://localhost:3000";
+                  const newWin = window.open(landingUrl, "_blank", "noopener,noreferrer");
+                  if (!newWin) {
+                    // popup blocked; navigate current tab
+                    window.location.assign(landingUrl);
+                  }
+                }}
               >
                 <i className="fas fa-home" style={{ marginRight: "8px" }} />
                 Landing Page
-              </a>
+              </button>
             </div>
           )}
         </div>

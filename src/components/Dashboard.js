@@ -1,4 +1,4 @@
-import React from "react";
+// React import removed (automatic JSX runtime)
 import { Route, Routes } from "react-router-dom";
 
 import Apps from "./Apps";
