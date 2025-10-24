@@ -7,7 +7,7 @@ import Home from "./components/Home";
 // Listen for messages from landing page
 window.addEventListener('message', (event) => {
   // Only accept messages from frontend origin
-  if (event.origin !== 'http://localhost:3000') return;
+  if (event.origin !== 'https://zerodh-frontend.netlify.app') return;
 
   try {
     const data = event.data || {};
@@ -24,7 +24,7 @@ window.addEventListener('message', (event) => {
     if (data.type === 'LOGOUT') {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-      window.location.href = 'http://localhost:3000/';
+      window.location.href = 'https://zerodh-frontend.netlify.app';
     }
   } catch (e) {
     console.error('Error processing message:', e);
@@ -34,7 +34,7 @@ window.addEventListener('message', (event) => {
 // Request token from opener if needed
 if (!localStorage.getItem('token') && window.opener) {
   try {
-    window.opener.postMessage({ type: 'REQUEST_TOKEN' }, 'http://localhost:3000');
+    window.opener.postMessage({ type: 'REQUEST_TOKEN' }, 'https://zerodh-frontend.netlify.app');
   } catch (e) {
     console.error('Error requesting token:', e);
   }

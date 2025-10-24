@@ -9,12 +9,12 @@ const PrivateRoute = ({ children }) => {
       // Ask opener (landing) for token
       try {
         if (window.opener && !window.opener.closed) {
-          window.opener.postMessage({ type: 'REQUEST_TOKEN' }, 'http://localhost:3000');
+          window.opener.postMessage({ type: 'REQUEST_TOKEN' }, 'https://zerodh-frontend.netlify.app');
         }
       } catch (e) {}
 
       const onMessage = (event) => {
-        if (event.origin !== 'http://localhost:3000') return;
+        if (event.origin !== 'https://zerodh-frontend.netlify.app') return;
         const data = event.data || {};
         if (data.type === 'AUTH_TOKEN' && data.token) {
           localStorage.setItem('token', data.token);

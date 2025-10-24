@@ -19,11 +19,11 @@ const Menu = () => {
     // Notify landing page about logout
     try {
       if (window.opener && !window.opener.closed) {
-        window.opener.postMessage({ type: "LOGOUT" }, "http://localhost:3000");
+        window.opener.postMessage({ type: "LOGOUT" }, "https://zerodh-frontend.netlify.app");
       }
     } catch (e) {}
     // Redirect back to landing
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "https://zerodh-frontend.netlify.app";
   };
 
   const menuClass = "menu";
@@ -141,7 +141,7 @@ const Menu = () => {
                   justifyContent: "center"
                 }}
                 onClick={() => {
-                  const landingUrl = "http://localhost:3000";
+                  const landingUrl = "https://zerodh-frontend.netlify.app";
                   const newWin = window.open(landingUrl, "_blank", "noopener,noreferrer");
                   if (!newWin) {
                     // popup blocked; navigate current tab
