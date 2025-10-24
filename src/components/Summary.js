@@ -1,10 +1,26 @@
 // React import removed (automatic JSX runtime)
+import React, { useEffect, useState } from "react";
+
 
 const Summary = () => {
+  const [username, setUsername] = useState("User");
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+      try {
+        const parsedUser = JSON.parse(user);
+        setUsername(parsedUser.username || "User");
+      } catch (e) {
+        console.error("Error parsing user:", e);
+      }
+    }
+  }, []);
+
   return (
     <>
       <div className="username">
-        <h6>Hi, User!</h6>
+        <h6>Hi, {username}!</h6>
         <hr className="divider" />
       </div>
 
