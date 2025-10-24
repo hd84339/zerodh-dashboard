@@ -1,0 +1,52 @@
+import React, { useState, useEffect } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+
+const PrivateRoute = ({ children }) => {
+  const [hasToken, setHasToken] = useState(!!localStorage.getItem('token'));
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!hasToken && window.opener) {
+      // Request token from landing page
+      try {
+        window.opener.postMessage({ type: 'REQUEST_TOKEN' }, 'http://localhost:3000');
+      } catch (e) {}
+
+      // Listen for response
+      const onMessage = (event) => {
+        if (event.origin !== 'http://localhost:3000') return;
+        
+        const data = event.data || {};
+        if (data.type === 'AUTH_TOKEN' && data.token) {
+          localStorage.setItem('token', data.token);
+          if (data.user) {
+            localStorage.setItem('user', JSON.stringify(data.user));
+          }
+          setHasToken(true);
+        }
+      };
+
+      window.addEventListener('message', onMessage);
+
+      // Clean up after 2 seconds if no token received
+      const timeout = setTimeout(() => {
+        window.removeEventListener('message', onMessage);
+      }, 2000);
+
+      return () => {
+        clearTimeout(timeout);
+        window.removeEventListener('message', onMessage);
+      };
+    }
+  }, [hasToken]);
+
+  if (!hasToken) {
+    // Redirect to landing login
+    window.location.href = 'http://localhost:3000/login';
+    return null;
+  }
+
+  return children;
+};
+
+export default PrivateRoute;
